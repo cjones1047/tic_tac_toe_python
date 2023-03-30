@@ -40,8 +40,8 @@ winning_codes = [
 ]
 
 players = {
-    'X': {},
-    'O': {}
+    'X': [],
+    'O': []
 }
 
 play_game = True
@@ -51,7 +51,9 @@ while play_game:
     player_move = input(f'Player {current_player} move by entering box number (such as "A1" for top-left corner):'
                         f'\n').upper()
     if player_move in board_cell_dict:
-        print(board_cell_dict[player_move])
+        board_list[board_cell_dict[player_move]] = current_player
+        player_moves = players[current_player]
+        player_moves.append(current_player)
     else:
         print('Invalid move.')
         continue
