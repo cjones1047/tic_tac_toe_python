@@ -1,4 +1,5 @@
 import random
+from time import sleep
 
 board_ascii = """
 
@@ -53,8 +54,15 @@ while play_game:
     if player_move in board_cell_dict:
         board_list[board_cell_dict[player_move]] = current_player
         player_moves = players[current_player]
-        player_moves.append(current_player)
+        player_moves.append(player_move)
+        del board_cell_dict[player_move]
     else:
         print('Invalid move.')
+        sleep(1)
         continue
+    for code in winning_codes:
+        if all(move in player_moves for move in code):
+            print()
+            print(f'Player {current_player} wins.')
+            play_game = False
     current_player = [player for player in players if player != current_player][0]
